@@ -39,7 +39,6 @@ function toggleTheme() {
       <Icon icon="logos:vuetifyjs" />
       <Icon icon="logos:unocss" />
       <Icon icon="logos:tailwindcss-icon" />
-      <img src="daisy.ico" alt="" width="20" />
       <Icon icon="line-md:iconify1" />
       <Icon icon="logos:capacitorjs-icon" />
       <Icon

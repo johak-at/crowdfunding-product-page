@@ -79,7 +79,6 @@ definePageMeta({
         </v-card>
       </v-container>
       <div flex flex-col items-center gap-4 p-4>
-        <img src="daisy.ico" alt="" width="45" />
         <a href="https://daisyui.com/components/" class="link"
           >daisyUI Components</a
         >
