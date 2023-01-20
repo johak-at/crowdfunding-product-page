@@ -47,11 +47,23 @@ definePageMeta({
       
   </div>
   <div class="cards-middle">
+    
+    
     <div class="top-card-section">
+      <div class="logo"><img src="logo-mastercraft.svg" alt="Logo" class="base-logo"></div>
+      <h1 class="top-title">Schnecken Checker</h1>
+      <h2 class="top-subtitle">Das beste Männer- und Frauenmagnet ALLERZEITEN!</h2>
+      <div class="top-buttons">
+        <button class="btn btn-accent mx-30">Back this project</button>
+        <button class="btn btn-accent mx-30">Bookmarked</button>
+      </div>
 
     </div>
     <div class="middle-card-section"></div>
-    <div class="bottom-card-section"></div>
+    <div class="bottom-card-section">
+      <div class="product-1"></div>
+      <div class="product-2"></div>
+    </div>
 
 
   </div>
@@ -64,6 +76,33 @@ definePageMeta({
 
 <style>
 
+.top-buttons{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+
+.top-title{
+  color: black;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+
+}
+.top-subtitle{
+  color: grey;
+  font-size: 16px;
+  text-align: center;
+
+}
+
+.logo{
+  width: 50px;
+  height: 50px;
+  margin-top: -25px;
+  margin-left: 350px;
+}
+
 .top-card-section{
   width: 750px;
   height: 250px;
@@ -71,23 +110,51 @@ definePageMeta({
   /*center vertically without using margin*/
   margin-top: 30px;
   margin-left: 25px;
+  border-width: 0.5px;
+ border-style:solid;
+ border-color:grey;
+
 
 
 }
 .middle-card-section{
   width: 750px;
-  height: 250px;
+  height: 200px;
+  border-radius: 10px;
+  margin-top: 30px;
+  margin-left: 25px;
+  border-width: 0.5px;
+ border-style:solid;
+ border-color:grey;
+
+}
+.bottom-card-section{
+  width: 750px;
+  height: 450px;
   border-radius: 10px;
   margin-top: 30px;
   margin-left: 25px;
 
 }
-.bottom-card-section{
+.product-1{
   width: 750px;
-  height: 250px;
+  height: 215px;
   border-radius: 10px;
-  margin-top: 30px;
-  margin-left: 25px;
+  border-color:grey;
+  border-width: 0.5px;
+ border-style:solid;
+ border-color:grey;
+
+}
+.product-2{
+  width: 750px;
+  height: 215px;
+  border-radius: 10px;
+  margin-top: 20px;
+  border-color:grey;
+  border-width: 0.5px;
+ border-style:solid;
+ border-color:grey;
 
 }
 
@@ -106,6 +173,7 @@ definePageMeta({
   height: 100vh;
   /**center horizontally */
   margin: 0 auto;
+  
 
 }
 
@@ -133,9 +201,6 @@ definePageMeta({
 
     }
 div{
-  border-width: 0.5px;
- border-style:solid;
- border-color:red
 }
 
     .v-main{
