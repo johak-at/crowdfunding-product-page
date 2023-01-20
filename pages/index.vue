@@ -206,5 +206,7 @@ div{
 
     .v-main{
       background-color: white;
+      overflow: hidden;
     }
+
 </style>
