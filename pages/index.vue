@@ -54,8 +54,8 @@ definePageMeta({
       <h1 class="top-title">Schnecken Checker</h1>
       <h2 class="top-subtitle">Das beste Männer- und Frauenmagnet ALLERZEITEN!</h2>
       <div class="top-buttons">
-        <button class="btn btn-accent mx-30">Back this project</button>
-        <button class="btn btn-accent mx-30">Bookmarked</button>
+        <button class="btn btn-accent">Back this project</button>
+        <button class="btn btn-accent">Bookmarked</button>
       </div>
 
     </div>
@@ -78,7 +78,7 @@ definePageMeta({
 
 .top-buttons{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-top: 50px;
 }
 
@@ -161,6 +161,7 @@ definePageMeta({
 .Header{
   display: flex;
   justify-content: space-between;
+  margin-top: 3px;
 }
 .rightside{
   display: flex;
