@@ -43,8 +43,17 @@ function addDonation() {
   ) {
     backed_amount.value += parseInt(donation_amount.value);
     backers.value++;
+  } else if (donation_amount.value == "" || donation_amount.value == null) {
   } else {
-    alert("Zwischen 1 und 100000 du Hund!");
+    alert("Zwischen 1 und 100000 du");
+  }
+}
+
+function ClearFields() {
+  donation_amount.value = "";
+}
+function checkAmount() {
+  if (donation_amount.value >= 100000) {
   }
 }
 //make a function that sets backed amount as a format with 1000 seperator
@@ -88,7 +97,15 @@ function addDonation() {
         />
         <p class="py-4"></p>
         <div class="modal-action">
-          <label for="my-modal" class="btn" @click="addDonation">Donate!</label>
+          <label
+            for="my-modal"
+            class="btn"
+            @click="
+              addDonation();
+              ClearFields();
+            "
+            >Donate!</label
+          >
         </div>
       </div>
     </div>
