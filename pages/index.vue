@@ -33,8 +33,19 @@ let backed_amount = ref(89914);
 let backers = ref(5007);
 
 function addDonation() {
-  backed_amount.value += parseInt(donation_amount.value);
-  backers.value++;
+  if (
+    !isNaN(donation_amount.value) &&
+    donation_amount.value != "" &&
+    donation_amount.value != null &&
+    donation_amount.value != undefined &&
+    donation_amount.value >= 1 &&
+    donation_amount.value <= 100000
+  ) {
+    backed_amount.value += parseInt(donation_amount.value);
+    backers.value++;
+  } else {
+    alert("Zwischen 1 und 100000 du Hund!");
+  }
 }
 //make a function that sets backed amount as a format with 1000 seperator
 </script>
@@ -72,6 +83,8 @@ function addDonation() {
           type="number"
           placeholder="Donation Amount"
           class="input w-full max-w-xs text-[#f1f1f1] mt-10"
+          min="1"
+          max="100000"
         />
         <p class="py-4"></p>
         <div class="modal-action">
