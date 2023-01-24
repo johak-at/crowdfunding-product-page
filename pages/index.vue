@@ -28,185 +28,278 @@ async function takePic() {
 definePageMeta({
   alias: "/home",
 });
+
+let backed_amount = ref(89914);
+let backers = ref(5007);
+
+function addDonation() {
+  backed_amount.value += parseInt(donation_amount.value);
+  backers.value++;
+}
+//make a function that sets backed amount as a format with 1000 seperator
 </script>
 
 <template>
-  
-<!--<div class="Image">
+  <!--<div class="Image">
     <img src="@/public/image-hero-desktop.jpg" alt="Desktop">
 </div>-->
 
-<!--Eigenes Div für die ganze Seite-->
-<div class="Seite">
+  <!--Eigenes Div für die ganze Seite-->
+  <div class="Seite">
     <div class="Header">
-      <a class="Header-title">Crowdfunding</a>
+      <a class="Header-title" href="http://localhost:3000/">Crowdfunding</a>
       <div class="rightside">
-      <a class="Header-Insta">Insta</a>
-      <a class="Header-about">About</a>
+        <a
+          class="Header-Insta"
+          target="_blank"
+          href="https://www.instagram.com/johak.pongau/"
+          >Insta</a
+        >
+        <a class="Header-about" href="http://localhost:3000/about">About</a>
       </div>
-      
-  </div>
-  <div class="cards-middle">
-    
-    
-    <div class="top-card-section">
-      <div class="logo"><img src="logo-mastercraft.svg" alt="Logo" class="base-logo"></div>
-      <h1 class="top-title">Schnecken Checker</h1>
-      <h2 class="top-subtitle">Das beste Männer- und Frauenmagnet ALLERZEITEN!</h2>
-      <div class="top-buttons">
-        <button class="btn btn-accent">Back this project</button>
-        <button class="btn btn-accent">Bookmarked</button>
-      </div>
-
-    </div>
-    <div class="middle-card-section"></div>
-    <div class="bottom-card-section">
-      <div class="product-1"></div>
-      <div class="product-2"></div>
     </div>
 
+    <!-- Put this part before </body> tag -->
+    <input type="checkbox" id="my-modal" class="modal-toggle" />
+    <div class="modal">
+      <div class="modal-box">
+        <h3 class="font-bold text-lg">Back this Project</h3>
+        <h4 class="modal_untertitel">
+          Want to support us in bringing Schnecken Checker out in the world?
+        </h4>
+        <input
+          id="donation_amount"
+          type="number"
+          placeholder="Donation Amount"
+          class="input w-full max-w-xs text-[#f1f1f1] mt-10"
+        />
+        <p class="py-4"></p>
+        <div class="modal-action">
+          <label for="my-modal" class="btn" @click="addDonation">Donate!</label>
+        </div>
+      </div>
+    </div>
+    <div class="cards-middle">
+      <!--------------------------------------------------------------------------------->
 
+      <div class="top-card-section">
+        <div class="logo">
+          <img src="logo-mastercraft.svg" alt="Logo" class="base-logo" />
+        </div>
+        <h1 class="top-title">Schnecken Checker</h1>
+        <h2 class="top-subtitle">
+          Der beste Männer- und Frauenmagnet ALLERZEITEN!
+        </h2>
+        <div class="top-buttons">
+          <label for="my-modal" class="btn btn-accent">
+            Back this project
+          </label>
+          <button class="btn btn-accent">Bookmarked</button>
+        </div>
+      </div>
+      <div class="middle-card-section">
+        <div class="middle_amounts">
+          <div class="moneyamount">
+            <h1>${{ backed_amount }}</h1>
+            <h2 class="money_subtitle">of $ 100,000</h2>
+          </div>
+          <div class="backers">
+            <h1>{{ backers }}</h1>
+            <h2 class="money_subtitle">total backers</h2>
+          </div>
+          <div class="days">
+            <h1>56</h1>
+            <h2 class="money_subtitle">days left</h2>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-card-section">
+        <div class="product-1"></div>
+        <div class="product-2"></div>
+      </div>
+    </div>
   </div>
-  
-</div>
-    
-
-    
 </template>
 
 <style>
-
-.top-buttons{
-  display: flex;
-  justify-content: space-around;
-  margin-top: 50px;
+.modal {
+  color: black;
 }
 
-.top-title{
+.modal-box {
+  background-color: white;
+  height: 800px;
+  width: 750px;
+}
+
+.modal_untertitel {
+  color: grey;
+  font-size: 14px;
+}
+
+.days {
+  color: black;
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: 70px;
+  max-width: 250px;
+  max-height: 200px;
+  margin-top: 60px;
+  margin-right: 70px;
+}
+
+.backers {
+  color: black;
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: 70px;
+  max-width: 250px;
+  max-height: 200px;
+  margin-top: 60px;
+}
+
+.money_subtitle {
+  color: grey;
+  font-size: 18px;
+  font-weight: lighter;
+}
+
+.moneyamount {
+  color: black;
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: 70px;
+  margin-top: 60px;
+  max-width: 250px;
+  max-height: 200px;
+}
+
+.top-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+.top-title {
   color: black;
   font-size: 25px;
   font-weight: bold;
   text-align: center;
-
 }
-.top-subtitle{
+.top-subtitle {
   color: grey;
   font-size: 16px;
   text-align: center;
-
 }
 
-.logo{
+.logo {
   width: 50px;
   height: 50px;
   margin-top: -25px;
   margin-left: 350px;
 }
 
-.top-card-section{
+.top-card-section {
   width: 750px;
-  height: 250px;
+  height: 200px;
   border-radius: 10px;
   /*center vertically without using margin*/
   margin-top: 30px;
   margin-left: 25px;
   border-width: 0.5px;
- border-style:solid;
- border-color:grey;
-
-
-
+  border-style: solid;
+  /*border-color: grey;*/
+  background-color: white;
 }
-.middle-card-section{
+.middle_amounts {
+  display: flex;
+  justify-content: space-between;
+}
+.middle-card-section {
   width: 750px;
   height: 200px;
   border-radius: 10px;
-  margin-top: 30px;
+  margin-top: 20px;
   margin-left: 25px;
   border-width: 0.5px;
- border-style:solid;
- border-color:grey;
-
+  border-style: solid;
+  /* border-color: grey;*/
+  background-color: white;
 }
-.bottom-card-section{
+.bottom-card-section {
   width: 750px;
   height: 450px;
   border-radius: 10px;
-  margin-top: 30px;
+  margin-top: 20px;
   margin-left: 25px;
-
 }
-.product-1{
+.product-1 {
   width: 750px;
   height: 215px;
   border-radius: 10px;
-  border-color:grey;
   border-width: 0.5px;
- border-style:solid;
- border-color:grey;
-
+  border-style: solid;
+  /**border-color: grey;*/
+  background-color: white;
 }
-.product-2{
+.product-2 {
   width: 750px;
   height: 215px;
   border-radius: 10px;
   margin-top: 20px;
-  border-color:grey;
   border-width: 0.5px;
- border-style:solid;
- border-color:grey;
-
+  border-style: solid;
+  /* border-color: grey;*/
+  background-color: white;
 }
 
-.Header{
+.Header {
   display: flex;
   justify-content: space-between;
   margin-top: 3px;
 }
-.rightside{
+.rightside {
   display: flex;
   justify-content: adjust;
   margin-top: 3px;
 }
 
-.cards-middle{
+.cards-middle {
   width: 800px;
   height: 100vh;
   /**center horizontally */
   margin: 0 auto;
-  
-
 }
 
-.Header-about{
-  color:black;
+.Header-about {
+  color: black;
   font-size: 16px;
-  font-weight: bold; 
+  font-weight: bold;
   margin-left: 50px;
   margin-right: 100px;
 }
 
-.Header-title{
-        color:black;
-        font-size: 20px;
-        font-weight: bold; 
-        margin: 0;
-        padding: 0;
-        margin-left: 100px;
-    }
-.Header-Insta{
-        color:black;
-        font-size: 16px;
-        font-weight: 70; 
-        font-weight: bold;
-
-    }
-div{
+.Header-title {
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  margin-left: 100px;
+}
+.Header-Insta {
+  color: black;
+  font-size: 16px;
+  font-weight: 70;
+  font-weight: bold;
+}
+div {
 }
 
-    .v-main{
-      background-color: white;
-      overflow: hidden;
-    }
-
+.v-main {
+  background-color: #f9f9f9;
+  overflow: hidden;
+  max-width: 100vw;
+  max-height: 100vh;
+}
 </style>
