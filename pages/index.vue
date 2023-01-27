@@ -127,10 +127,10 @@ function checkAmount() {
           <button class="btn btn-accent">Bookmarked</button>
         </div>
       </div>
-      <div class="middle-card-section">
+      <div class="middle-card-section flex flex-col" >
         <div class="middle_amounts">
           <div class="moneyamount">
-            <h1>${{ backed_amount }}</h1>
+            <h1 :class="{'text-success': backed_amount >= 100000}">${{ backed_amount }}</h1>
             <h2 class="money_subtitle">of $ 100,000</h2>
           </div>
           <div class="backers">
@@ -142,6 +142,7 @@ function checkAmount() {
             <h2 class="money_subtitle">days left</h2>
           </div>
         </div>
+        <progress class="progress w-11/12 m-auto" :class="{'progress-success': backed_amount >= 100000}" :value="backed_amount" max="100000"></progress>
       </div>
       <div class="bottom-card-section">
         <div class="product-1"></div>
