@@ -4,6 +4,23 @@ import { Camera, CameraResultType } from "@capacitor/camera";
 import { useStore } from "~/store/store";
 import { storeToRefs } from "pinia";
 
+const rewards = ref([
+  {
+    title: "2er Bmw",
+    url: "/bmw2er.jpg",
+    price: 100,
+    description: "Ein getunter 2er BMW mit 500 PS und 1000 NM Drehmoment",
+    left: 100,
+  },
+  {
+    title: "4er Bmw",
+    url: "/bmw4er.jpg",
+    price: 200,
+    description: "Ein getunter 4er BMW mit 900 PS und 1200 NM Drehmoment",
+    left: 80,
+  },
+]);
+
 // useStore() and name handling:
 const store = useStore();
 const name = storeToRefs(store).name;
@@ -110,8 +127,6 @@ function checkAmount() {
       </div>
     </div>
     <div class="cards-middle">
-      <!--------------------------------------------------------------------------------->
-
       <div class="top-card-section">
         <div class="logo">
           <img src="logo-mastercraft.svg" alt="Logo" class="base-logo" />
@@ -127,10 +142,12 @@ function checkAmount() {
           <button class="btn btn-accent">Bookmarked</button>
         </div>
       </div>
-      <div class="middle-card-section flex flex-col" >
+      <div class="middle-card-section flex flex-col">
         <div class="middle_amounts">
           <div class="moneyamount">
-            <h1 :class="{'text-success': backed_amount >= 100000}">${{ backed_amount }}</h1>
+            <h1 :class="{ 'text-success': backed_amount >= 100000 }">
+              ${{ backed_amount }}
+            </h1>
             <h2 class="money_subtitle">of $ 100,000</h2>
           </div>
           <div class="backers">
@@ -142,11 +159,26 @@ function checkAmount() {
             <h2 class="money_subtitle">days left</h2>
           </div>
         </div>
-        <progress class="progress w-11/12 m-auto" :class="{'progress-success': backed_amount >= 100000}" :value="backed_amount" max="100000"></progress>
+        <progress
+          class="progress w-11/12 m-auto"
+          :class="{ 'progress-success': backed_amount >= 100000 }"
+          :value="backed_amount"
+          max="100000"
+        ></progress>
       </div>
-      <div class="bottom-card-section">
-        <div class="product-1"></div>
-        <div class="product-2"></div>
+      <div class="bottom-card-section text-black">
+        <div v-for="reward in rewards" flex flex-col items-center>
+          <div class="w-12/12 flex justify-between">
+            <h1>{{ reward.title }}</h1>
+            <p>Pledge {{ reward.price }} $ or more</p>
+          </div>
+          <img :src="reward.url" alt="a picture of a car" />
+          <div>{{ reward.description }}</div>
+          <div class="w-12/12 flex justify-between">
+            {{ reward.left }} left
+            <button class="btn btn-accent">Select Reward</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
