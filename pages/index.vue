@@ -361,8 +361,7 @@ div {
 
 .v-main {
   background-color: #f9f9f9;
-  overflow: hidden;
-  max-width: 100vw;
-  max-height: 100vh;
+  /*max-width: 100vw;
+  max-height: 100vh;*/
 }
 </style>
