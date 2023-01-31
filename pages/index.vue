@@ -100,6 +100,9 @@ function checkAmount() {
     <input type="checkbox" id="my-modal" class="modal-toggle" />
     <div class="modal">
       <div class="modal-box">
+        <!--create a X to close modal-->
+        <label for="my-modal" class="modal-close">X</label>
+
         <h3 class="font-bold text-lg">Back this Project</h3>
         <h4 class="modal_untertitel">
           Want to support us in bringing Schnecken Checker out in the world?
@@ -112,11 +115,29 @@ function checkAmount() {
           min="1"
           max="100000"
         />
+        <div class="modal-Items">
+          <div class="modal-Items-top">
+            <input type="radio" name="radio-1" class="radio-btn" />
+            <span class="text-[black]">Pledge with no reward</span>
+          </div>
+          <div class="modal-Items-middle">
+            <input type="radio" name="radio-1" class="radio-btn" />
+            <span class="text-[black]">{{ rewards[0].title }}</span>
+            <span class="text-[black]">{{ rewards[0].left }}</span>
+          </div>
+          <div class="modal-Items-bottom">
+            <input type="radio" name="radio-1" class="radio-btn" />
+            <div class="flex justify-between">
+              <h1 class="text-[black]">{{ rewards[1].title }}</h1>
+              <h1 class="text-[black]">{{ rewards[1].left }}</h1>
+            </div>
+          </div>
+        </div>
         <p class="py-4"></p>
         <div class="modal-action">
           <label
             for="my-modal"
-            class="btn"
+            class="btn btn-accent btn-modal"
             @click="
               addDonation();
               ClearFields();
@@ -172,11 +193,11 @@ function checkAmount() {
             <h1>{{ reward.title }}</h1>
             <p>Pledge {{ reward.price }} $ or more</p>
           </div>
-          <img :src="reward.url" alt="a picture of a car" />
+          <img :src="reward.url" alt="a picture of a car" class="carPics" />
           <div>{{ reward.description }}</div>
           <div class="w-12/12 flex justify-between">
             {{ reward.left }} left
-            <button class="btn btn-accent">Select Reward</button>
+            <button class="btn btn-accent" for="my-modal">Select Reward</button>
           </div>
         </div>
       </div>
@@ -185,6 +206,73 @@ function checkAmount() {
 </template>
 
 <style>
+.radio-btn {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.modal-Items-top {
+  width: 460px;
+  height: 100px;
+  border-radius: 10px;
+  border-width: 0.5px;
+  border-style: solid;
+  border-color: grey;
+  background-color: white;
+  margin-top: 20px;
+  display: flex;
+  justify-content: left;
+}
+
+.modal-Items-middle {
+  width: 460px;
+  height: 100px;
+  border-radius: 10px;
+  border-width: 0.5px;
+  border-style: solid;
+  border-color: grey;
+  background-color: white;
+  margin-top: 20px;
+  display: flex;
+  justify-content: left;
+}
+
+.modal-Items-bottom {
+  width: 460px;
+  height: 100px;
+  border-radius: 10px;
+  border-width: 0.5px;
+  border-style: solid;
+  border-color: grey;
+  background-color: white;
+  margin-top: 20px;
+  display: flex;
+  justify-content: left;
+}
+
+.modal-close {
+  position: absolute;
+  font-weight: bold;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+  cursor: pointer;
+  z-index: 100;
+}
+.btn-modal {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+.carPics {
+  width: 750px;
+  height: 215px;
+  border-radius: 10px;
+  border-width: 0.5px;
+  border-style: solid;
+  /**border-color: grey;*/
+  background-color: white;
+}
+
 .modal {
   color: black;
 }
@@ -363,5 +451,8 @@ div {
   background-color: #f9f9f9;
   /*max-width: 100vw;
   max-height: 100vh;*/
+}
+.hydrated {
+  background-color: #f9f9f9;
 }
 </style>
