@@ -4,6 +4,7 @@ import { Camera, CameraResultType } from "@capacitor/camera";
 import { useStore } from "~/store/store";
 import { storeToRefs } from "pinia";
 
+// Zwei Objekte mit den Eigenschaften Title, Url, Price, Description und Left. Left gibt an wie viele von dem jeweiligen Reward noch verfügbar sind.
 const rewards = ref([
   {
     title: "2er Bmw",
@@ -46,9 +47,11 @@ definePageMeta({
   alias: "/home",
 });
 
-let backed_amount = ref(89914);
+let backed_amount = ref(57000);
 let backers = ref(5007);
 
+// Überprüft, ob der Eingegebene Betrag in den richtigen Bereich liegt, wenn ja wird der Betrag dem Gesamtbetrag hinzugefügt und die Anzahl der Spender um 1 erhöht. 
+// Wenn der Betrag nicht in den richtigen Bereich liegt, wird eine Fehlermeldung ausgegeben.
 function addDonation() {
   if (
     !isNaN(donation_amount.value) &&
@@ -65,14 +68,11 @@ function addDonation() {
     alert("Zwischen 1 und 100000 du");
   }
 }
-
+// macht den Input Feld leer
 function ClearFields() {
   donation_amount.value = "";
 }
-function checkAmount() {
-  if (donation_amount.value >= 100000) {
-  }
-}
+
 //make a function that sets backed amount as a format with 1000 seperator
 </script>
 
@@ -166,6 +166,7 @@ function checkAmount() {
       <div class="middle-card-section flex flex-col">
         <div class="middle_amounts">
           <div class="moneyamount">
+            <!-- wenn der Betrag >= 100000 dann wird die Klasse text-success hinzugefügt und damit wird der Text grün angezeigt -->
             <h1 :class="{ 'text-success': backed_amount >= 100000 }">
               ${{ backed_amount }}
             </h1>
@@ -180,14 +181,17 @@ function checkAmount() {
             <h2 class="money_subtitle">days left</h2>
           </div>
         </div>
+        <!-- Progress Bar mit der Klasse progress-success wenn die backed_amount >= 100000 ist dann wird der Balken voll und grün angezeigt. -->
         <progress
           class="progress w-11/12 m-auto"
           :class="{ 'progress-success': backed_amount >= 100000 }"
           :value="backed_amount"
           max="100000"
         ></progress>
+        <!-- -------------------------------------------------------------------- -->
       </div>
       <div class="bottom-card-section text-black">
+        <!-- Aus der rewards Objekt werden die Daten ausgelesen und in die Karten gelegt und die Bilder werden aus dem Array gezogen und angezeigt. -->
         <div v-for="reward in rewards" flex flex-col items-center>
           <div class="w-12/12 flex justify-between">
             <h1>{{ reward.title }}</h1>
@@ -198,6 +202,7 @@ function checkAmount() {
           <div class="w-12/12 flex justify-between">
             {{ reward.left }} left
             <button class="btn btn-accent" for="my-modal">Select Reward</button>
+            <!-- ---------------------------------------------------------------------- -->
           </div>
         </div>
       </div>
