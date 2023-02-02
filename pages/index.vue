@@ -73,6 +73,7 @@ function ClearFields() {
   donation_amount.value = "";
 }
 
+
 //make a function that sets backed amount as a format with 1000 seperator
 </script>
 
@@ -107,29 +108,46 @@ function ClearFields() {
         <h4 class="modal_untertitel">
           Want to support us in bringing Schnecken Checker out in the world?
         </h4>
-        <input
-          id="donation_amount"
-          type="number"
-          placeholder="Donation Amount"
-          class="input w-full max-w-xs text-[#f1f1f1] mt-10"
-          min="1"
-          max="100000"
-        />
+        
         <div class="modal-Items">
           <div class="modal-Items-top">
             <input type="radio" name="radio-1" class="radio-btn" />
             <span class="text-[black]">Pledge with no reward</span>
+            <input
+          id="donation_amount"
+          type="number"
+          placeholder="Donation Amount"
+          class="h-30px w-150px ml-22 mt-15 rounded-lg border-2 border-black"
+          min="1"
+          max="100000"
+        />
           </div>
           <div class="modal-Items-middle">
             <input type="radio" name="radio-1" class="radio-btn" />
             <span class="text-[black]">{{ rewards[0].title }}</span>
             <span class="text-[black]">{{ rewards[0].left }}</span>
+            <input
+          id="donation_amount"
+          type="number"
+          placeholder="Donation Amount"
+          class="h-30px w-150px ml-40 mt-15 rounded-lg border-2 border-black"
+          min="1"
+          max="100000"
+        />
           </div>
           <div class="modal-Items-bottom">
             <input type="radio" name="radio-1" class="radio-btn" />
             <div class="flex justify-between">
               <h1 class="text-[black]">{{ rewards[1].title }}</h1>
               <h1 class="text-[black]">{{ rewards[1].left }}</h1>
+              <input
+          id="donation_amount"
+          type="number"
+          placeholder="Donation Amount"
+          class="h-30px w-150px ml-42 mt-15 rounded-lg border-2 border-black"
+          min="1"
+          max="100000"
+        />
             </div>
           </div>
         </div>
@@ -160,7 +178,6 @@ function ClearFields() {
           <label for="my-modal" class="btn btn-accent">
             Back this project
           </label>
-          <button class="btn btn-accent">Bookmarked</button>
         </div>
       </div>
       <div class="middle-card-section flex flex-col">
@@ -191,6 +208,13 @@ function ClearFields() {
         <!-- -------------------------------------------------------------------- -->
       </div>
       <div class="bottom-card-section text-black">
+        <div class="w-12/12 flex justify-between">
+            <div class="star">
+              <input type="checkbox" id="star1" name="star" />
+              <label for="star1"></label>
+            </div>
+            
+            </div>
         <!-- Aus der rewards Objekt werden die Daten ausgelesen und in die Karten gelegt und die Bilder werden aus dem Array gezogen und angezeigt. -->
         <div v-for="reward in rewards" flex flex-col items-center>
           <div class="w-12/12 flex justify-between">
@@ -199,6 +223,12 @@ function ClearFields() {
           </div>
           <img :src="reward.url" alt="a picture of a car" class="carPics" />
           <div>{{ reward.description }}</div>
+          <!-- put a star icon using iconify next to the reward description if the star is pressed it should fill in with color -->
+
+          
+          
+          
+          
           <div class="w-12/12 flex justify-between">
             {{ reward.left }} left
             <button class="btn btn-accent" for="my-modal">Select Reward</button>
@@ -211,6 +241,38 @@ function ClearFields() {
 </template>
 
 <style>
+
+/* make the  stars work*/
+.star {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url("star.svg") no-repeat;
+  background-size: 20px 20px;
+  cursor: pointer;
+}
+
+.star input {
+  display: none;
+}
+
+.star label {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: url("star.svg") no-repeat;
+  background-size: 20px 20px;
+  cursor: pointer;
+}
+
+.star input:checked ~ label {
+  background: url("star-filled.svg") no-repeat;
+  background-size: 20px 20px;
+}
+
+
+
+
 .radio-btn {
   margin-right: 10px;
   margin-left: 10px;
