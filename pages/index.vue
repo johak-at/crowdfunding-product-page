@@ -7,20 +7,29 @@ import { storeToRefs } from "pinia";
 // Zwei Objekte mit den Eigenschaften Title, Url, Price, Description und Left. Left gibt an wie viele von dem jeweiligen Reward noch verfügbar sind.
 const rewards = ref([
   {
+    id: 1,
     title: "2er Bmw",
     url: "/bmw2er.jpg",
     price: 100,
     description: "Ein getunter 2er BMW mit 500 PS und 1000 NM Drehmoment",
     left: 100,
+    favorite: false,
   },
   {
+    id: 2,
     title: "4er Bmw",
     url: "/bmw4er.jpg",
     price: 200,
     description: "Ein getunter 4er BMW mit 900 PS und 1200 NM Drehmoment",
     left: 80,
+    favorite: false,
   },
 ]);
+
+function toggle() {
+  // set the value to the opposite
+  console.log(rewards[0].favorite);
+}
 
 // useStore() and name handling:
 const store = useStore();
@@ -50,7 +59,7 @@ definePageMeta({
 let backed_amount = ref(57000);
 let backers = ref(5007);
 
-// Überprüft, ob der Eingegebene Betrag in den richtigen Bereich liegt, wenn ja wird der Betrag dem Gesamtbetrag hinzugefügt und die Anzahl der Spender um 1 erhöht. 
+// Überprüft, ob der Eingegebene Betrag in den richtigen Bereich liegt, wenn ja wird der Betrag dem Gesamtbetrag hinzugefügt und die Anzahl der Spender um 1 erhöht.
 // Wenn der Betrag nicht in den richtigen Bereich liegt, wird eine Fehlermeldung ausgegeben.
 function addDonation() {
   if (
@@ -63,16 +72,54 @@ function addDonation() {
   ) {
     backed_amount.value += parseInt(donation_amount.value);
     backers.value++;
+    ClearFields();
   } else if (donation_amount.value == "" || donation_amount.value == null) {
   } else {
     alert("Zwischen 1 und 100000 du");
   }
 }
+function addDonation1() {
+  if (
+    !isNaN(donation_amount1.value) &&
+    donation_amount1.value != "" &&
+    donation_amount1.value != null &&
+    donation_amount1.value != undefined &&
+    donation_amount1.value >= 100 &&
+    donation_amount1.value <= 100000
+  ) {
+    backed_amount.value += parseInt(donation_amount1.value);
+    backers.value++;
+    ClearFields();
+    rewards.value[0].left -= 1;
+  } else if (donation_amount1.value == "" || donation_amount1.value == null) {
+  } else {
+    alert("Zwischen 100 und 100000 du");
+  }
+}
+function addDonation2() {
+  if (
+    !isNaN(donation_amount2.value) &&
+    donation_amount2.value != "" &&
+    donation_amount2.value != null &&
+    donation_amount2.value != undefined &&
+    donation_amount2.value >= 200 &&
+    donation_amount2.value <= 100000
+  ) {
+    backed_amount.value += parseInt(donation_amount2.value);
+    backers.value++;
+    ClearFields();
+    rewards.value[1].left -= 1;
+  } else if (donation_amount2.value == "" || donation_amount2.value == null) {
+  } else {
+    alert("Zwischen 100 und 100000 du");
+  }
+}
 // macht den Input Feld leer
 function ClearFields() {
   donation_amount.value = "";
+  donation_amount1.value = "";
+  donation_amount2.value = "";
 }
-
 
 //make a function that sets backed amount as a format with 1000 seperator
 </script>
@@ -87,9 +134,6 @@ function ClearFields() {
     <div class="Header">
       <a class="Header-title" href="http://localhost:3000/">Crowdfunding</a>
       <div class="rightside">
-        <!-- create a darkmode button that makes a dark mode on the site -->
-        <button class="Header-button">Darkmode</button>
-
         <a
           class="Header-Insta"
           target="_blank"
@@ -113,78 +157,86 @@ function ClearFields() {
         </h4>
         <!-- grey out whole div if radio button not selected -->
 
-        
-
         <div class="modal-Items">
-          <div class="collapse mt-100px">
-  <input type="checkbox" /> 
-  <div class="collapse-title text-l font-medium">
-    Pledge with no reward
-  </div>
-  <div class="collapse-content"> 
-    <p>Help us out with any amount to donate!</p>
-    <input
-          id="donation_amount"
-          type="number"
-          placeholder="Donation Amount"
-          class="h-30px w-150px rounded-lg border-2 border-black"
-          min="1"
-          max="100000"
-        />
-  </div>
-</div>
-<div class="collapse mt-100px">
-  <input type="checkbox" /> 
-  <div class="collapse-title text-l font-medium">
-    {{ rewards[0].title }}
-  </div>
-  <div class="collapse-content"> 
-    <p><span class="text-[black]">{{ rewards[0].left }} left</span></p>
-    <p class="mt-3px">{{ rewards[0].description }}</p>
-    <input
-          id="donation_amount"
-          type="number"
-          placeholder="Donation Amount"
-          class="h-30px w-150px rounded-lg border-2 border-black"
-          min="100"
-          max="100000"
-        />
-  </div>
-</div>
-<div class="collapse mt-100px">
-  <input type="checkbox" /> 
-  <div class="collapse-title text-l font-medium">
-    {{ rewards[1].title }}
-  </div>
-  <div class="collapse-content"> 
-    <p><span class="text-[black]">{{ rewards[1].left }} left</span></p>
-    <p class="mt-3px">{{ rewards[1].description }}</p>
-    <input
-          id="donation_amount"
-          type="number"
-          placeholder="Donation Amount"
-          class="h-30px w-150px rounded-lg border-2 border-black"
-          min="200"
-          max="100000"
-        />
-  </div>
-</div>
-          
-         
-          
-          
+          <div class="collapse mt-49px bg-white border-1 border-grey">
+            <input type="checkbox" />
+            <div class="collapse-title text-l font-medium">
+              Pledge with no reward
+            </div>
+            <div class="collapse-content">
+              <p>Help us out with any amount to donate!</p>
+              <input
+                id="donation_amount"
+                type="number"
+                placeholder="Donation Amount"
+                class="h-30px w-150px border-1 border-grey"
+                min="1"
+                max="100000"
+              />
+              <label
+                for="my-modal"
+                class="btn btn-accent btn-modal ml-320px"
+                @click="addDonation()"
+                >Donate!</label
+              >
+            </div>
+          </div>
+
+          <div class="collapse mt-49px border-1 border-grey bg-white">
+            <input type="checkbox" />
+            <div class="collapse-title text-l font-medium">
+              {{ rewards[0].title }}
+            </div>
+            <div class="collapse-content">
+              <p>
+                <span class="text-[black]">{{ rewards[0].left }} left</span>
+              </p>
+              <p class="mt-3px">{{ rewards[0].description }}</p>
+              <input
+                id="donation_amount1"
+                type="number"
+                placeholder="Donation Amount"
+                class="h-30px w-150px border-1 border-grey"
+                min="100"
+                max="100000"
+              />
+              <label
+                for="my-modal"
+                class="btn btn-accent btn-modal ml-320px"
+                @click="addDonation1()"
+                >Donate!</label
+              >
+            </div>
+          </div>
+          <div class="collapse mt-49px border-1 border-grey bg-white">
+            <input type="checkbox" />
+            <div class="collapse-title text-l font-medium">
+              {{ rewards[1].title }}
+            </div>
+            <div class="collapse-content">
+              <p>
+                <span class="text-[black]">{{ rewards[1].left }} left</span>
+              </p>
+              <p class="mt-3px">{{ rewards[1].description }}</p>
+              <input
+                id="donation_amount2"
+                type="number"
+                placeholder="Donation Amount"
+                class="h-30px w-150px border-1 border-grey"
+                min="200"
+                max="100000"
+              />
+              <label
+                for="my-modal"
+                class="btn btn-accent btn-modal ml-320px"
+                @click="addDonation2()"
+                >Donate!</label
+              >
+            </div>
+          </div>
         </div>
         <p class="py-4"></p>
-        <div class="modal-action">
-          <label
-            for="my-modal"
-            class="btn btn-accent btn-modal"
-            @click="
-              addDonation();
-              ClearFields();"
-            >Donate!</label
-          >
-        </div>
+        <div class="modal-action"></div>
       </div>
     </div>
     <div class="cards-middle">
@@ -230,31 +282,38 @@ function ClearFields() {
         <!---------------------------------------------------------------------- -->
       </div>
       <div class="bottom-card-section text-black">
-        
         <!-- Aus der rewards Objekt werden die Daten ausgelesen und in die Karten gelegt und die Bilder werden aus dem Array gezogen und angezeigt. -->
-        <div v-for="reward in rewards" flex flex-col items-center>
-          <div class="w-12/12 flex justify-between">
-            <div class="star">
-              <input type="checkbox" id="star1" name="star" />
-              <label for="star1"></label>
-            </div>
-            
-            </div>
+        <div
+          v-for="(reward, index) in rewards"
+          :key="rewards.id"
+          flex
+          flex-col
+          items-center
+        >
           <div class="w-12/12 flex justify-between">
             <h1>{{ reward.title }}</h1>
             <p>Pledge {{ reward.price }} $ or more</p>
           </div>
           <img :src="reward.url" alt="a picture of a car" class="carPics" />
           <div>{{ reward.description }}</div>
-          <!-- put a star icon using iconify next to the reward description if the star is pressed it should fill in with color -->
-
-          
-          
-          
-          
-          <div class="w-12/12 flex justify-between">
+          <div
+            @click="rewards[index].favorite = !rewards[index].favorite"
+            class="favorite"
+          >
+            <Icon
+              v-if="!reward.favorite"
+              text-8
+              icon="ic:baseline-star-outline"
+            />
+            <Icon
+              v-else
+              text-8
+              icon="ic:outline-star"
+              @click="clicked = false"
+            />
+          </div>
+          <div class="w-12/12 flex justify-between mb-30px mt-0">
             {{ reward.left }} left
-            <button class="btn btn-accent" for="my-modal">Select Reward</button>
             <!-- ---------------------------------------------------------------------- -->
           </div>
         </div>
@@ -264,44 +323,14 @@ function ClearFields() {
 </template>
 
 <style>
-
-
 /* make the Header-button work */
 
-
-
-
-
-
-.star {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  background: url("star.svg") no-repeat;
-  background-size: 20px 20px;
+.favorite {
+  position: relative;
   cursor: pointer;
+  margin-left: 700px;
+  margin-top: -25px;
 }
-
-.star input {
-  display: none;
-}
-
-.star label {
-  display: block;
-  width: 20px;
-  height: 20px;
-  background: url("star.svg") no-repeat;
-  background-size: 20px 20px;
-  cursor: pointer;
-}
-
-.star input:checked ~ label {
-  background: url("star-filled.svg") no-repeat;
-  background-size: 20px 20px;
-}
-
-
-
 
 .radio-btn {
   margin-right: 10px;
@@ -355,14 +384,9 @@ function ClearFields() {
   cursor: pointer;
   z-index: 100;
 }
-.btn-modal {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-}
 .carPics {
   width: 750px;
-  height: 215px;
+  height: 400px;
   border-radius: 10px;
   border-width: 0.5px;
   border-style: solid;
@@ -375,8 +399,8 @@ function ClearFields() {
 }
 
 .modal-box {
-  background-color: white;
-  height: 800px;
+  background-color: #f1f1f1;
+  height: 600px;
   width: 750px;
 }
 
