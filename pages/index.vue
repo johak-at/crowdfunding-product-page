@@ -87,6 +87,9 @@ function ClearFields() {
     <div class="Header">
       <a class="Header-title" href="http://localhost:3000/">Crowdfunding</a>
       <div class="rightside">
+        <!-- create a darkmode button that makes a dark mode on the site -->
+        <button class="Header-button">Darkmode</button>
+
         <a
           class="Header-Insta"
           target="_blank"
@@ -108,48 +111,68 @@ function ClearFields() {
         <h4 class="modal_untertitel">
           Want to support us in bringing Schnecken Checker out in the world?
         </h4>
+        <!-- grey out whole div if radio button not selected -->
+
         
+
         <div class="modal-Items">
-          <div class="modal-Items-top">
-            <input type="radio" name="radio-1" class="radio-btn" />
-            <span class="text-[black]">Pledge with no reward</span>
-            <input
+          <div class="collapse mt-100px">
+  <input type="checkbox" /> 
+  <div class="collapse-title text-l font-medium">
+    Pledge with no reward
+  </div>
+  <div class="collapse-content"> 
+    <p>Help us out with any amount to donate!</p>
+    <input
           id="donation_amount"
           type="number"
           placeholder="Donation Amount"
-          class="h-30px w-150px ml-22 mt-15 rounded-lg border-2 border-black"
+          class="h-30px w-150px rounded-lg border-2 border-black"
           min="1"
           max="100000"
         />
-          </div>
-          <div class="modal-Items-middle">
-            <input type="radio" name="radio-1" class="radio-btn" />
-            <span class="text-[black]">{{ rewards[0].title }}</span>
-            <span class="text-[black]">{{ rewards[0].left }}</span>
-            <input
+  </div>
+</div>
+<div class="collapse mt-100px">
+  <input type="checkbox" /> 
+  <div class="collapse-title text-l font-medium">
+    {{ rewards[0].title }}
+  </div>
+  <div class="collapse-content"> 
+    <p><span class="text-[black]">{{ rewards[0].left }} left</span></p>
+    <p class="mt-3px">{{ rewards[0].description }}</p>
+    <input
           id="donation_amount"
           type="number"
           placeholder="Donation Amount"
-          class="h-30px w-150px ml-40 mt-15 rounded-lg border-2 border-black"
-          min="1"
+          class="h-30px w-150px rounded-lg border-2 border-black"
+          min="100"
           max="100000"
         />
-          </div>
-          <div class="modal-Items-bottom">
-            <input type="radio" name="radio-1" class="radio-btn" />
-            <div class="flex justify-between">
-              <h1 class="text-[black]">{{ rewards[1].title }}</h1>
-              <h1 class="text-[black]">{{ rewards[1].left }}</h1>
-              <input
+  </div>
+</div>
+<div class="collapse mt-100px">
+  <input type="checkbox" /> 
+  <div class="collapse-title text-l font-medium">
+    {{ rewards[1].title }}
+  </div>
+  <div class="collapse-content"> 
+    <p><span class="text-[black]">{{ rewards[1].left }} left</span></p>
+    <p class="mt-3px">{{ rewards[1].description }}</p>
+    <input
           id="donation_amount"
           type="number"
           placeholder="Donation Amount"
-          class="h-30px w-150px ml-42 mt-15 rounded-lg border-2 border-black"
-          min="1"
+          class="h-30px w-150px rounded-lg border-2 border-black"
+          min="200"
           max="100000"
         />
-            </div>
-          </div>
+  </div>
+</div>
+          
+         
+          
+          
         </div>
         <p class="py-4"></p>
         <div class="modal-action">
@@ -158,8 +181,7 @@ function ClearFields() {
             class="btn btn-accent btn-modal"
             @click="
               addDonation();
-              ClearFields();
-            "
+              ClearFields();"
             >Donate!</label
           >
         </div>
@@ -205,18 +227,19 @@ function ClearFields() {
           :value="backed_amount"
           max="100000"
         ></progress>
-        <!-- -------------------------------------------------------------------- -->
+        <!---------------------------------------------------------------------- -->
       </div>
       <div class="bottom-card-section text-black">
-        <div class="w-12/12 flex justify-between">
+        
+        <!-- Aus der rewards Objekt werden die Daten ausgelesen und in die Karten gelegt und die Bilder werden aus dem Array gezogen und angezeigt. -->
+        <div v-for="reward in rewards" flex flex-col items-center>
+          <div class="w-12/12 flex justify-between">
             <div class="star">
               <input type="checkbox" id="star1" name="star" />
               <label for="star1"></label>
             </div>
             
             </div>
-        <!-- Aus der rewards Objekt werden die Daten ausgelesen und in die Karten gelegt und die Bilder werden aus dem Array gezogen und angezeigt. -->
-        <div v-for="reward in rewards" flex flex-col items-center>
           <div class="w-12/12 flex justify-between">
             <h1>{{ reward.title }}</h1>
             <p>Pledge {{ reward.price }} $ or more</p>
@@ -242,7 +265,14 @@ function ClearFields() {
 
 <style>
 
-/* make the  stars work*/
+
+/* make the Header-button work */
+
+
+
+
+
+
 .star {
   display: inline-block;
   width: 20px;
