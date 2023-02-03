@@ -78,6 +78,11 @@ function addDonation() {
     alert("Zwischen 1 und 100000 du");
   }
 }
+function ClearFields() {
+  donation_amount.value = "";
+  donation_amount1.value = "";
+  donation_amount2.value = "";
+}
 function addDonation1() {
   if (
     !isNaN(donation_amount1.value) &&
@@ -115,11 +120,6 @@ function addDonation2() {
   }
 }
 // macht den Input Feld leer
-function ClearFields() {
-  donation_amount.value = "";
-  donation_amount1.value = "";
-  donation_amount2.value = "";
-}
 
 //make a function that sets backed amount as a format with 1000 seperator
 </script>
@@ -165,7 +165,7 @@ function ClearFields() {
           <!-- create an x to remove from favorites -->
 
           <li v-if="reward.favorite">
-            {{ reward.title }} - {{ reward.left }} left &bs
+            {{ reward.title }} - {{ reward.left }} left
             <button class="ml-10px" @click="reward.favorite = false">X</button>
           </li>
         </div>
