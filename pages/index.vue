@@ -13,7 +13,7 @@ const rewards = ref([
     price: 100,
     description: "Ein getunter 2er BMW mit 500 PS und 1000 NM Drehmoment",
     left: 100,
-    favorite: true,
+    favorite: false,
   },
   {
     id: 2,
@@ -329,20 +329,18 @@ function addDonation2() {
           </div>
           <img :src="reward.url" alt="a picture of a car" class="carPics" />
           <div>{{ reward.description }}</div>
-          <div
-            @click="rewards[index].favorite = !rewards[index].favorite"
-            class="favorite"
-          >
+          <div class="favorite">
             <Icon
               v-if="!reward.favorite"
+              @click="rewards[index].favorite = !rewards[index].favorite"
               text-8
               icon="ic:baseline-star-outline"
             />
             <Icon
               v-else
+              @click="rewards[index].favorite = !rewards[index].favorite"
               text-8
               icon="ic:outline-star"
-              @click="clicked = false"
             />
           </div>
           <div class="w-12/12 flex justify-between mb-30px mt-0">
