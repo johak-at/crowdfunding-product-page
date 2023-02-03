@@ -13,7 +13,7 @@ const rewards = ref([
     price: 100,
     description: "Ein getunter 2er BMW mit 500 PS und 1000 NM Drehmoment",
     left: 100,
-    favorite: false,
+    favorite: true,
   },
   {
     id: 2,
@@ -144,6 +144,38 @@ function ClearFields() {
       </div>
     </div>
 
+    <input type="checkbox" id="my-modal-fav" class="modal-toggle" />
+    <div class="modal">
+      <div class="modal-box">
+        <label for="my-modal-fav" class="modal-close">X</label>
+        <h3 class="font-bold text-lg">Favorites</h3>
+        <h4 class="modal_untertitel">
+          These are your favorite projects. You can remove them from your
+          favorites
+        </h4>
+        <!-- create a list of the favorite rewards using v-if and v-for -->
+
+        <div
+          v-for="reward in rewards"
+          flex
+          flex-col
+          items-center
+          class="text-xl mt-60px"
+        >
+          <!-- create an x to remove from favorites -->
+
+          <li v-if="reward.favorite">
+            {{ reward.title }} - {{ reward.left }} left &bs
+            <button class="ml-10px" @click="reward.favorite = false">X</button>
+          </li>
+        </div>
+
+        <div class="modal-items"></div>
+        <p class="py-4"></p>
+        <div class="modal-action"></div>
+      </div>
+    </div>
+
     <!-- Put this part before </body> tag -->
     <input type="checkbox" id="my-modal" class="modal-toggle" />
     <div class="modal">
@@ -252,6 +284,7 @@ function ClearFields() {
           <label for="my-modal" class="btn btn-accent">
             Back this project
           </label>
+          <label for="my-modal-fav" class="btn btn-accent"> Favorites </label>
         </div>
       </div>
       <div class="middle-card-section flex flex-col">
